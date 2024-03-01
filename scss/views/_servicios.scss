@@ -1,0 +1,32 @@
+.servicios {
+    font-family: $acme;
+    font-size: 25px;
+    text-align: start;
+    margin-left: 40px;
+    padding: 10px;
+}
+
+#carouselfono,
+#carouselto,
+#carouselkine {
+    padding: 20px;
+
+      img {
+        max-width: 100%;
+        width: 50px;
+        height: 50em;
+        margin: 0 auto; // Para centrar la imagen horizontalmente
+        display: block;
+      }
+    }
+
+.servicios-text {
+    @include text-block(16px, $roboto);
+}
+
+
+
+
+
+  
+  

@@ -1,0 +1,31 @@
+//Fuentes
+
+$acme: 'Acme', sans-serif;
+$pompiere: 'Pompiere', cursive;
+$montserrat: 'Montserrat', sans-serif;
+$roboto: 'Roboto';
+$font-color-principal: black;
+
+//Colores
+
+$verde: #679899;
+$verdeclaro: #7EA5AC;
+$morado: #A6A7F0;
+$gris: #D2DDE9;
+$blanco: #FFFFFF;
+
+//Sizes
+
+$fuente-principal: 3.8rem;
+$font-small: 1rem;
+$font-medium: 1.5rem;
+$font-xl: 2rem;
+$font-xxl: 3rem;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);

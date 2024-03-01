@@ -1,0 +1,16 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    color: $blanco;
+    background-color: $verde;
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-top: 10px;
+    padding: 30px;
+    text-align: center;
+
+    .contenedor-iconos {
+        display: block;
+        align-items: center;
+    }
+}

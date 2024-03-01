@@ -1,0 +1,46 @@
+.contact-form {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: $gris;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    label {
+        display: block;
+        margin: 1em 0 0.5em;
+        font-family: $montserrat;
+        font-weight: bold;
+        font-size: $font-medium;
+        color: $verde;
+    }
+    
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 0.5em;
+        margin: 0.5em 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+        font-family: $montserrat;
+    }
+    
+    button {
+        background-color: $morado;
+        color: white;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+        font-family: $montserrat;
+    }
+    
+    button:hover {
+        background-color: $verde;
+    }
+}
+

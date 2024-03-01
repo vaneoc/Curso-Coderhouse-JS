@@ -1,0 +1,19 @@
+//base
+@import './utilities/variables';
+@import './base/reset';
+@import './utilities/mixins';
+@import './base/tipografias';
+
+
+//componentes
+@import './components/nav';
+@import './components/footer';
+
+//pages
+@import './views/inicio';
+@import './views/servicios';
+@import './views/equipo';
+@import './views/blog';
+@import './views/contacto';
+
+/*# sourceMappingURL=style.scss.map */

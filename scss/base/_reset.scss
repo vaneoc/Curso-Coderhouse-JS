@@ -1,0 +1,68 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+  
+body, button, input, select, textarea {
+    font-family: Arial, sans-serif;
+}
+  
+ul, ol {
+    list-style: none;
+}
+  
+pre {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline; 
+  text-decoration: underline dotted;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: $pompiere, sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+img {
+    width: 100%;
+}
+
+main {
+  display: block;
+}
+
+
+
+
+
+

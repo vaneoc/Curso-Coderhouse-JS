@@ -1,64 +1,86 @@
+//Función para obtener la información del paciente desde el formulario
 function obtenerInformacionPaciente() {
-    let nombre = prompt("Ingresa nombre del paciente:");
-    let edadPaciente = prompt("Ingresa la edad del paciente:");
-    return { nombre, edadPaciente };
-  }
-  
-  function procesarInformacion({ edadPaciente, nombre }) {
+    let nombre = document.getElementById("nombre-nino").value;
+    let edadPaciente = document.getElementById("edad-nino").value;
+    return { nombre, edadPaciente }; // Retorna un objeto con el nombre y edad del paciente
+}
+
+// Función para procesar la información del paciente y realizar la reserva
+function procesarInformacion({ edadPaciente, nombre }) {
+    let nombreCuidador = document.getElementById("nombre-cuidador").value; // Obtiene el nombre del cuidador
+
     if (edadPaciente >= 18) {
         alert("Lo sentimos, no puedes tomar horas de rehabilitación si el paciente tiene 18 años o más.");
-        return null; 
+        return false;
     }
-  
-    const especialidadSeleccionada = seleccionarEspecialidad(nombre);
+
+    const especialidadSeleccionada = document.getElementById("especialidad").value;
     if (!especialidadSeleccionada) {
         alert('No has seleccionado ninguna especialidad.');
-        return null; 
+        return false;
     }
-  
-    const horaSeleccionada = seleccionarHora(especialidadSeleccionada);
-    if (!horaSeleccionada) {
-        alert('No has seleccionado ninguna hora.');
-        return null; 
-    }
-  
-    const confirmacion = confirmarReserva(horaSeleccionada, especialidadSeleccionada);
-    if (confirmacion) {
-        const email = prompt("Ingresa tu correo electrónico:");
-        alert(`Gracias por tu reserva, ${nombre}. Te enviaremos la información de tu cita a ${email}.`);
-    }
-  }
-  
-  function seleccionarEspecialidad(nombre) {
-    const especialidades = ["kinesiología", "fonoaudiología", "terapia ocupacional"];
-    alert(`Hola ${nombre}, selecciona la especialidad que deseas reservar:`);
-    for (let i = 0; i < especialidades.length; i++) {
-        const especialidad = especialidades[i];
-        const respuesta = prompt(`${i + 1}. ${especialidad} (ingrese "si" para seleccionar o "no" para omitir)`);
-        if (respuesta.toLowerCase() === 'si') {
-            return especialidad;
+
+    while (true) {
+        // Si no se seleccionó otra hora, se procede a seleccionar la primera disponible
+        const horaSeleccionada = seleccionarHora(especialidadSeleccionada);
+        if (!horaSeleccionada) {
+            alert('No has seleccionado ninguna hora.');
+            return false;
+        }
+
+        const confirmacion = confirmarReserva(horaSeleccionada, especialidadSeleccionada);
+        if (confirmacion) {
+            const email = document.getElementById("email").value;
+            alert(`Gracias por tu reserva, ${nombreCuidador}. Te enviaremos la información de la cita para ${nombre} a ${email}.`);
+            alert("¡Gracias por utilizar nuestro servicio de reserva de citas!");
+            return true;
+        } else {
+            const continuar = confirm('¿Deseas volver a las opciones de hora?');
+            if (!continuar) {
+                alert("¡Gracias por utilizar nuestro servicio de reserva de citas!");
+                return false;
+            }
         }
     }
-    return null;
-  }
-  
-  function seleccionarHora(especialidadSeleccionada) {
+}
+
+// Función para seleccionar una hora disponible según la especialidad
+function seleccionarHora(especialidadSeleccionada) {
     const horasDisponibles = [9, 10, 11, 14, 15, 16];
     alert(`Has seleccionado ${especialidadSeleccionada}`);
     for (let j = 0; j < horasDisponibles.length; j++) {
         const hora = horasDisponibles[j];
-        const respuesta = prompt(`La siguiente hora disponible para ${especialidadSeleccionada} es a las ${hora} horas, ¿Deseas reservar esta hora? (ingrese "si" para confirmar o "no" para omitir)`);
-        if (respuesta.toLowerCase() === 'si') {
+        let respuesta;
+        do {
+            respuesta = prompt(`La siguiente hora disponible para ${especialidadSeleccionada} es a las ${hora} horas, ¿Deseas reservar esta hora? (ingrese "si" para confirmar o "no" para omitir)`);
+            respuesta = respuesta ? respuesta.trim().toLowerCase() : ''; // Convierte la respuesta a minúsculas y elimina espacios en blanco
+            if (respuesta !== 'si' && respuesta !== 'no') {
+                alert('Por favor, ingrese "si" para confirmar o "no" para omitir.');
+            }
+        } while (respuesta !== 'si' && respuesta !== 'no');
+        if (respuesta === 'si') {
             return hora;
         }
     }
     return null;
-  }
-  
-  function confirmarReserva(horaSeleccionada, especialidadSeleccionada) {
-    return confirm(`Has reservado tu cita a las ${horaSeleccionada} horas para ${especialidadSeleccionada} ¿deseas continuar?`);
-  }
-  
-  const { nombre, edadPaciente } = obtenerInformacionPaciente();
-  procesarInformacion({ edadPaciente, nombre });
-  
+}
+
+// Función para validar la respuesta de confirmación
+function validarRespuestaConfirmar(respuesta) {
+    return respuesta && (respuesta.toLowerCase() === 'si' || respuesta.toLowerCase() === 'no');
+}
+
+// Función para confirmar la reserva
+function confirmarReserva(horaSeleccionada, especialidadSeleccionada) {
+    let respuesta;
+    do {
+        respuesta = prompt(`Has reservado tu cita a las ${horaSeleccionada} horas para ${especialidadSeleccionada} ¿deseas continuar? (ingrese "si" para confirmar, "no" para volver a las opciones de horas disponibles)`);
+        respuesta = respuesta ? respuesta.trim().toLowerCase() : ''; // Convierte la respuesta a minúsculas y elimina espacios en blanco
+        if (!validarRespuestaConfirmar(respuesta)) {
+            alert('Por favor, ingrese "si" para confirmar o "no" para volver a las opciones de horas disponibles.');
+        }
+    } while (!validarRespuestaConfirmar(respuesta));
+
+    // Realiza la acción según la respuesta del usuario
+    return respuesta === 'si';
+}
